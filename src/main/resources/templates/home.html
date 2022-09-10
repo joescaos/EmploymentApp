@@ -56,7 +56,7 @@
                 <h6 class="card-title"><strong>Categoría: </strong> <span>Arquitectura</span></h6>
                 <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${employment.date}"> </span></h6>
                 <p th:text="${employment.description}"></p>
-                <p><a class="btn btn-secondary" href="#" role="button">Ver Detalle &raquo;</a></p>
+                <p><a class="btn btn-secondary" th:href="@{details/{id} (id = ${employment.id})}" role="button">Ver Detalle &raquo;</a></p>
             </div>
         </div>
         <hr>
