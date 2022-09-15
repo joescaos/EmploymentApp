@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,6 +20,7 @@ import java.util.List;
 @RequestMapping("/positions")
 public class EmploymentController {
 
+    private static final String POSITION_SAVED_SUCCESS_MSG = "Registro guardado";
     @Autowired
     private IEmploymentService employmentService;
 
@@ -42,12 +44,13 @@ public class EmploymentController {
     }
 
     @PostMapping("/save")
-    public String save(Employment employment, BindingResult result) {
+    public String save(Employment employment, BindingResult result, RedirectAttributes attributes) {
         if(result.hasErrors()){
             return "positions/positionForm";
         }
         employmentService.save(employment);
-        return "positions/positionsList";
+        attributes.addFlashAttribute("msg", POSITION_SAVED_SUCCESS_MSG);
+        return "redirect:/positions/index";
     }
 
     @InitBinder
