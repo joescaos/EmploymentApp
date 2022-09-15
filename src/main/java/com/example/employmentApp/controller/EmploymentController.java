@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,6 +20,7 @@ import java.util.List;
 @RequestMapping("/positions")
 public class EmploymentController {
 
+    private static final String POSITION_SAVED_SUCCESS_MSG = "Registro guardado";
     @Autowired
     private IEmploymentService employmentService;
 
@@ -35,14 +39,18 @@ public class EmploymentController {
     }
 
     @GetMapping("/create")
-    public String createPosition() {
+    public String createPosition(Employment employment) {
         return "positions/positionForm";
     }
 
     @PostMapping("/save")
-    public String save(Employment employment) {
+    public String save(Employment employment, BindingResult result, RedirectAttributes attributes) {
+        if(result.hasErrors()){
+            return "positions/positionForm";
+        }
         employmentService.save(employment);
-        return "positions/positionsList";
+        attributes.addFlashAttribute("msg", POSITION_SAVED_SUCCESS_MSG);
+        return "redirect:/positions/index";
     }
 
     @InitBinder
