@@ -1,6 +1,7 @@
-package com.example.employmentApp.service;
+package com.example.employmentApp.service.impl;
 
 import com.example.employmentApp.model.Employment;
+import com.example.employmentApp.service.IEmploymentService;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
