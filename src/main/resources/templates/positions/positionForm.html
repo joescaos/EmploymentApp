@@ -115,7 +115,7 @@
                 </div>
                 <div class="col-md-3">
                   <label for="imagen">Imagen/Logo</label>
-                  <img class="rounded mx-auto d-block" src="images/construccion-logo.png" alt="Generic placeholder image" width="200" height="200">
+                  <img class="rounded mx-auto d-block" th:src="@{/images/no-image.png}" alt="Generic placeholder image" width="200" height="200">
                 </div>
               </div>
               <button type="submit" class="btn btn-primary">Guardar</button>
@@ -134,24 +134,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
-    <script src="tinymce/tinymce.min.js"></script>
+    <script th:src="@{/tinymce/tinymce.min.js}"></script>
     <script>
-
       $(function () {
           $("#fecha").datepicker({dateFormat: 'dd-mm-yy'});
         }
       );
-
-      /*
       tinymce.init({
           selector: '#detalles',
           plugins: "textcolor, table lists code",
           toolbar: " undo redo | bold italic | alignleft aligncenter alignright alignjustify \n\
                     | bullist numlist outdent indent | forecolor backcolor table code"
       });
-
-      */
-
     </script>
   </body>
 </html>
