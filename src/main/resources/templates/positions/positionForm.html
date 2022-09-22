@@ -28,7 +28,7 @@
         <div class="card">
           <h4 class="card-header"><strong>Datos de la oferta de trabajo</strong></h4>
           <div class="card-body">
-            <form th:action="@{/positions/save}" method="post" th:object="${employment}">
+            <form th:action="@{/positions/save}" method="post" th:object="${employment}" enctype="multipart/form-data">
               <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
                 Por favor corrija los siguientes errores
                 <ul>
@@ -53,12 +53,10 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <label for="categoria">Categoría</label>
-                    <select class="form-control" name="category" id="categoria">
-                      <option value="1">Ventas</option>
-                      <option value="2">Contabilidad</option>
-                      <option value="3">Transporte</option>
-                      <option value="4">Informatica</option>
-                      <option value="5">Construccion</option>
+                    <select class="form-control" th:field="*{category.id}">
+                      <option th:each="category : ${categories}"
+                              th:value="${category.id}"
+                              th:text="${category.name}"></option>
                     </select>
                   </div>
                 </div>
@@ -100,8 +98,8 @@
                 </div>
                 <div class="col-md-3">
                   <div class="form-group">
-                    <label for="archivoImagen">Imagen</label>
-                    <input type="file" class="form-control-file" name="archivoImagen" id="archivoImagen">
+                    <label for="imageFile">Imagen</label>
+                    <input type="file" class="form-control-file" name="imageFile" id="imageFile">
                   </div>
                 </div>
               </div>

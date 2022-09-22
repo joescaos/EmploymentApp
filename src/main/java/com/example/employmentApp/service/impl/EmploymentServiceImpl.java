@@ -20,7 +20,6 @@ public class EmploymentServiceImpl implements IEmploymentService {
         try {
             Employment v1 = new Employment();
             v1.setId(1);
-            v1.setCategory("IT");
             v1.setName("Ingeniero de Software");
             v1.setDescription("Encargado de desarrollar software seguro y escalable");
             v1.setDate(sdf.parse("08-02-2019"));
@@ -31,7 +30,6 @@ public class EmploymentServiceImpl implements IEmploymentService {
 
             Employment v2 = new Employment();
             v2.setId(2);
-            v2.setCategory("IT");
             v2.setName("Ingeniero de Sistemas");
             v2.setDescription("Encargado de verificar los sistemas y su funcionamiento");
             v2.setDate(sdf.parse("10-09-2019"));
@@ -42,7 +40,6 @@ public class EmploymentServiceImpl implements IEmploymentService {
 
             Employment v3 = new Employment();
             v3.setId(3);
-            v3.setCategory("IT");
             v3.setName("Ingeniero Devops");
             v3.setDescription("Encargado de la cultura devops en la organizacion");
             v3.setDate(sdf.parse("11-05-2019"));
@@ -53,7 +50,6 @@ public class EmploymentServiceImpl implements IEmploymentService {
 
             Employment v4 = new Employment();
             v4.setId(4);
-            v4.setCategory("IT");
             v4.setName("Ingeniero de Soporte");
             v4.setDescription("Encargado de dar soporte a nuestros clientes");
             v4.setDate(sdf.parse("11-05-2019"));

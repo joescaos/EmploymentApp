@@ -16,21 +16,14 @@ public class Employment {
 
   private int highlighted;
 
-  private String category;
-
-  public String getCategory() {
-    return category;
-  }
-
   private String details;
 
   private String status;
 
   private String image = "no-image.png";
 
-  public void setCategory(String category) {
-    this.category = category;
-  }
+  private Category category;
+
 
   public void setHighlighted(int highlighted) {
     this.highlighted = highlighted;
@@ -108,6 +101,14 @@ public class Employment {
     this.image = image;
   }
 
+  public Category getCategory() {
+    return category;
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
+  }
+
   @Override
   public String toString() {
     return "Vacante{" +
@@ -120,6 +121,7 @@ public class Employment {
         ", categoria='" + category + '\'' +
         ", detalles='" + details + '\'' +
         ", estatus='" + status + '\'' +
+        ", imagen='" + image + '\'' +
         '}';
   }
 }
