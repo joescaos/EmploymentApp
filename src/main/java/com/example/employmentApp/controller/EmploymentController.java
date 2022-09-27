@@ -4,8 +4,9 @@ import com.example.employmentApp.model.Category;
 import com.example.employmentApp.model.Employment;
 import com.example.employmentApp.service.ICategoryService;
 import com.example.employmentApp.service.IEmploymentService;
-import com.example.employmentApp.utils.Utilery;
+import com.example.employmentApp.utils.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,9 @@ import java.util.Objects;
 public class EmploymentController {
 
     private static final String POSITION_SAVED_SUCCESS_MSG = "Registro guardado";
+
+    @Value("${employmentapp.path.images}")
+    private String path;
     @Autowired
     private IEmploymentService employmentService;
 
@@ -61,8 +65,7 @@ public class EmploymentController {
         }
 
         if(!file.isEmpty()) {
-            String path = "/Users/johancanas/Desktop/img/";
-            String imageName = Utilery.saveFile(file, path);
+            String imageName = Utility.saveFile(file, path);
             if(Objects.nonNull(imageName)) {
                 employment.setImage(imageName);
             }
