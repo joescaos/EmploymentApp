@@ -65,7 +65,7 @@ public class Employment {
     return description;
   }
 
-  public void setDescription(String descreiption) {
+  public void setDescription(String description) {
     this.description = description;
   }
 
