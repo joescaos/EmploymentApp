@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -25,7 +26,7 @@ public class MainController {
 
     @GetMapping("/details/{id}")
     public String positionDetails(@PathVariable int id, Model model) {
-        Employment employment = employmentService.getById(id);
+        Optional<Employment> employment = employmentService.getById(id);
         model.addAttribute("employment", employment);
         return "details";
     }
