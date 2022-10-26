@@ -33,7 +33,8 @@ public class Employment {
 
   private String image = "no-image.png";
 
-  @Transient
+  @OneToOne
+  @JoinColumn(name = "idCategory")
   private Category category;
 
 }
