@@ -29,7 +29,11 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
-    public Optional<Category> findById(Integer id) {
-        return categoriesRepository.findById(id);
+    public Category findById(Integer id) {
+        Optional<Category> category = categoriesRepository.findById(id);
+        if(category.isPresent()) {
+            return category.get();
+        }
+        return null;
     }
 }

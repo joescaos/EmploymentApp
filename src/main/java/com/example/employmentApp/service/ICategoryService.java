@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface ICategoryService {
     void save(Category category);
     List<Category> findAll();
-    Optional<Category> findById(Integer id);
+    Category findById(Integer id);
 }

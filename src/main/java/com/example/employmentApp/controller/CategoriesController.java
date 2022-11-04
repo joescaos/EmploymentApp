@@ -29,7 +29,9 @@ public class CategoriesController {
   }
 
   @GetMapping("/create")
-  public String createCategory() {
+  public String createCategory(Category category, Model model) {
+    Category categoryToSave = new Category();
+    model.addAttribute("category", categoryToSave);
     return "categories/categoryForm";
   }
 
