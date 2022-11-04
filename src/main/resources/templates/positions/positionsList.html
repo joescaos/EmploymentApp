@@ -13,6 +13,7 @@
     <!-- Custom styles for this template -->
     <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
   </head>
 
   <body>
@@ -27,8 +28,9 @@
         <div class="card">
           <h4 class="card-header"><strong>Listado de Ofertas de Trabajo</strong></h4>
           <div class="card-body">
-            <a class="btn btn-primary" th:href="@{/position/create}" title="Crear nueva Oferta de Trabajo" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nueva</a>
+            <a class="btn btn-primary" th:href="@{/positions/create}" title="Crear nueva Oferta de Trabajo" role="button"><i class="fas fa-file" aria-hidden="true"></i> Nueva</a>
             <hr>
+            <div th:if="${msg != null}" class="alert alert-success" th:text="${msg}" role="alert"></div>
             <table class="table table-hover">
               <thead class="thead-light">
                 <tr>
@@ -42,7 +44,7 @@
               </thead>
               <tbody>
                 <tr th:each="employment :${employments}">
-                  <td th:text="${employment.category}">Ventas</td>
+                  <td th:text="${employment.category.id}">Ventas</td>
                   <td th:text="${employment.name}">Supervisor de Ventas</td>
                   <td th:text="${employment.date}">11-01-2019</td>
                   <td th:text="${employment.status}">Creada</td>
