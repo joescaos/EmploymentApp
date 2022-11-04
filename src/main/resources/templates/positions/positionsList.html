@@ -44,7 +44,7 @@
               </thead>
               <tbody>
                 <tr th:each="employment :${employments}">
-                  <td th:text="${employment.category}">Ventas</td>
+                  <td th:text="${employment.category.id}">Ventas</td>
                   <td th:text="${employment.name}">Supervisor de Ventas</td>
                   <td th:text="${employment.date}">11-01-2019</td>
                   <td th:text="${employment.status}">Creada</td>
