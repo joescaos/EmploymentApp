@@ -26,7 +26,7 @@ public class MainController {
 
     @GetMapping("/details/{id}")
     public String positionDetails(@PathVariable int id, Model model) {
-        Optional<Employment> employment = employmentService.getById(id);
+        Employment employment = employmentService.getById(id);
         model.addAttribute("employment", employment);
         return "details";
     }

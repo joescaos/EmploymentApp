@@ -24,8 +24,12 @@ public class EmploymentServiceImpl implements IEmploymentService {
     }
 
     @Override
-    public Optional<Employment> getById(int id) {
-        return employmentsRepository.findById(id);
+    public Employment getById(int id) {
+        Optional<Employment> employment = employmentsRepository.findById(id);
+        if(employment.isPresent()) {
+            return employment.get();
+        }
+        return null;
     }
 
     @Override

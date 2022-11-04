@@ -9,7 +9,7 @@ public interface IEmploymentService {
 
     List<Employment> findAll();
 
-    Optional<Employment> getById(int id);
+    Employment getById(int id);
 
     void save(Employment employment);
 }
