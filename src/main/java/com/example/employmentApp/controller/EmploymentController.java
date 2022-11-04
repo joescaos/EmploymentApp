@@ -72,7 +72,6 @@ public class EmploymentController {
         }
 
         employmentService.save(employment);
-        System.out.println(employment);
         attributes.addFlashAttribute("msg", POSITION_SAVED_SUCCESS_MSG);
         return "redirect:/positions/index";
     }
