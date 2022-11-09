@@ -15,4 +15,6 @@ public interface EmploymentsRepository extends JpaRepository<Employment, Integer
 
     List<Employment> findByStatusIn(List<String> statuses);
 
+    List<Employment> findByHighlightedAndStatus(int highlighted, String status);
+
 }

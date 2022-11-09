@@ -12,4 +12,6 @@ public interface IEmploymentService {
     Employment getById(int id);
 
     void save(Employment employment);
+
+    List<Employment> getHighlightedPositions();
 }
