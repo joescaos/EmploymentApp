@@ -19,7 +19,7 @@ public class MainController {
 
     @GetMapping("/")
     public String mainView(Model model) {
-        List<Employment> employmentList = employmentService.findAll();
+        List<Employment> employmentList = employmentService.getHighlightedPositions();
         model.addAttribute("employments", employmentList);
         return "home";
     }

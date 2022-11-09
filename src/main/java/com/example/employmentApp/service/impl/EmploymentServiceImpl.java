@@ -36,4 +36,9 @@ public class EmploymentServiceImpl implements IEmploymentService {
     public void save(Employment employment) {
         employmentsRepository.save(employment);
     }
+
+    @Override
+    public List<Employment> getHighlightedPositions() {
+        return employmentsRepository.findByHighlightedAndStatus(1, "Aprobada");
+    }
 }
