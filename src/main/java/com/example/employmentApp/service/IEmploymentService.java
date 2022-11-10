@@ -14,4 +14,6 @@ public interface IEmploymentService {
     void save(Employment employment);
 
     List<Employment> getHighlightedPositions();
+
+    void deleteEmployment(Integer id);
 }
