@@ -44,7 +44,7 @@
               </thead>
               <tbody>
                 <tr th:each="employment :${employments}">
-                  <td th:text="${employment.category.id}">Ventas</td>
+                  <td th:text="${employment.category.name}">Ventas</td>
                   <td th:text="${employment.name}">Supervisor de Ventas</td>
                   <td th:text="${employment.date}">11-01-2019</td>
                   <td th:text="${employment.status}">Creada</td>
@@ -53,7 +53,7 @@
                     <span th:unless="${employment.highlighted==1}">No</span>
                   </td>
                   <td>
-                    <a href="#" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                    <a th:href="@{/positions/edit/{id} (id=${employment.id})}" class="btn btn-success btn-sm" role="button" title="Editar el registro."><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
                     <a th:href="@{/positions/delete/{id} (id=${employment.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar el registro."><i class="fas fa-trash" aria-hidden="true"></i></a>
                   </td>
                 </tr>
