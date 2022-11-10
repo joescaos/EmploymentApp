@@ -41,4 +41,9 @@ public class EmploymentServiceImpl implements IEmploymentService {
     public List<Employment> getHighlightedPositions() {
         return employmentsRepository.findByHighlightedAndStatus(1, "Aprobada");
     }
+
+    @Override
+    public void deleteEmployment(Integer id) {
+        employmentsRepository.deleteById(id);
+    }
 }

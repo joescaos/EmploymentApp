@@ -42,11 +42,11 @@ public class EmploymentController {
         return "positions/positionsList";
     }
 
-    @GetMapping("/delete")
-    public String delete(@RequestParam("id") int id, Model model) {
-        System.out.println("Borrando vacante con id: "+ id);
-        model.addAttribute("id", id);
-        return "message";
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") int id, RedirectAttributes attributes) {
+        attributes.addFlashAttribute("msg", "La vacante fue eliminada!");
+        employmentService.deleteEmployment(id);
+        return "redirect:/positions/index";
     }
 
     @GetMapping("/create")
