@@ -4,6 +4,7 @@ import com.example.employmentApp.model.Employment;
 import com.example.employmentApp.repositories.EmploymentsRepository;
 import com.example.employmentApp.service.IEmploymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,5 +46,9 @@ public class EmploymentServiceImpl implements IEmploymentService {
     @Override
     public void deleteEmployment(Integer id) {
         employmentsRepository.deleteById(id);
+    }
+    @Override
+    public List<Employment> findByExample(Example<Employment> example) {
+        return employmentsRepository.findAll(example);
     }
 }

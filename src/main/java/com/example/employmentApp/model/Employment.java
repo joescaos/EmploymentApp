@@ -23,9 +23,9 @@ public class Employment {
 
   private Date date;
 
-  private double salary;
+  private Double salary;
 
-  private int highlighted;
+  private Integer highlighted;
 
   private String details;
 
@@ -36,5 +36,9 @@ public class Employment {
   @OneToOne
   @JoinColumn(name = "idCategory")
   private Category category;
+
+  public void resetImage() {
+    this.image=null;
+  }
 
 }

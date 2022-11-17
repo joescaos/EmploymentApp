@@ -3,23 +3,21 @@ package com.example.employmentApp.controller;
 import com.example.employmentApp.model.Employment;
 import com.example.employmentApp.model.Profile;
 import com.example.employmentApp.model.User;
+import com.example.employmentApp.service.ICategoryService;
 import com.example.employmentApp.service.IEmploymentService;
 import com.example.employmentApp.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -31,6 +29,9 @@ public class MainController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private ICategoryService categoryService;
 
     @GetMapping("/")
     public String mainView(Model model) {
@@ -62,8 +63,24 @@ public class MainController {
         attributes.addFlashAttribute("msg", USER_SAVED_SUCCESS_MSG);
         return "redirect:/users/index";
     }
+    @GetMapping("/search")
+    public String search(@ModelAttribute("search") Employment employment, Model model) {
+        System.out.println("Buscando por: " + employment);
+        Example<Employment> example = Example.of(employment);
+        model.addAttribute("employments", employmentService.findByExample(example));
+        return "home";
+    }
     @ModelAttribute
     public void setGenerics(Model model) {
+        Employment employmentSearch = new Employment();
+        employmentSearch.resetImage();
         model.addAttribute("employments", employmentService.getHighlightedPositions());
+        model.addAttribute("categories", categoryService.findAll());
+        model.addAttribute("search", employmentSearch);
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
     }
 }
