@@ -47,8 +47,8 @@
             <td th:text="${category.name}"></td>
             <td th:text="${category.description}">Trabajos relacionados con el area de RH.</td>
             <td>
-              <a href="#" class="btn btn-success btn-sm" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-              <a href="#" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
+              <a th:href="@{/categories/edit/{id} (id=${category.id})}" class="btn btn-success btn-sm" role="button" title="Editar"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+              <a th:href="@{/categories/delete/{id} (id=${category.id})}" onclick="return confirm('¿Estas seguro?')" class="btn btn-success btn-sm" role="button" title="Eliminar"><i class="fas fa-trash" aria-hidden="true"></i></a>
             </td>
           </tr>
           </tbody>

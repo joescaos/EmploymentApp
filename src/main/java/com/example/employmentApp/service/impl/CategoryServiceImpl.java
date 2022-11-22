@@ -36,4 +36,9 @@ public class CategoryServiceImpl implements ICategoryService {
         }
         return null;
     }
+
+    @Override
+    public void deleteCategory(Integer id) {
+        categoriesRepository.deleteById(id);
+    }
 }

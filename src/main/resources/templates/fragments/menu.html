@@ -7,16 +7,16 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link active" href="/">Inicio</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" th:href="@{/categories/index}">Categorias</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" th:href="@{/positions/index}">Vacantes</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/users/index}">Usuarios</a>
+      </li>
     </ul>
     <a class="btn btn-primary" href="#">Ingresar</a>&nbsp;
-    <a class="btn btn-primary" href="#">Registrarse</a>
+    <a class="btn btn-primary" th:href="@{/signup}">Registrarse</a>
   </div>
 </nav>

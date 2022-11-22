@@ -13,6 +13,7 @@
     <!-- Custom styles for this template -->
     <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
     <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <link th:href="@{https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css}" rel="stylesheet" >
   </head>
 
   <body>
@@ -39,6 +40,8 @@
                 <div class="col-md-3">
                   <div class="form-group">
                     <label for="nombre">Nombre</label>
+                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden" th:field="*{image}">
                     <input type="text" class="form-control" th:field="*{name}" id="nombre" name="name" placeholder="Titulo de la oferta de trabajo" required="required">
                   </div>
                 </div>
@@ -113,7 +116,7 @@
                 </div>
                 <div class="col-md-3">
                   <label for="imagen">Imagen/Logo</label>
-                  <img class="rounded mx-auto d-block" th:src="@{/images/no-image.png}" alt="Generic placeholder image" width="200" height="200">
+                  <img class="rounded mx-auto d-block" th:src="@{/logos/{img} (img=${employment.image})}" alt="Generic placeholder image" width="200" height="200">
                 </div>
               </div>
               <button type="submit" class="btn btn-primary">Guardar</button>

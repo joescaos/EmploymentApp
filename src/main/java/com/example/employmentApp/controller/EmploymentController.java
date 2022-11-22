@@ -42,17 +42,15 @@ public class EmploymentController {
         return "positions/positionsList";
     }
 
-    @GetMapping("/delete")
-    public String delete(@RequestParam("id") int id, Model model) {
-        System.out.println("Borrando vacante con id: "+ id);
-        model.addAttribute("id", id);
-        return "message";
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") int id, RedirectAttributes attributes) {
+        attributes.addFlashAttribute("msg", "La vacante fue eliminada!");
+        employmentService.deleteEmployment(id);
+        return "redirect:/positions/index";
     }
 
     @GetMapping("/create")
-    public String createPosition(Employment employment, Model model) {
-        List<Category> categories = categoryService.findAll();
-        model.addAttribute("categories", categories);
+    public String createPosition(Employment employment) {
         return "positions/positionForm";
     }
 
@@ -74,6 +72,17 @@ public class EmploymentController {
         employmentService.save(employment);
         attributes.addFlashAttribute("msg", POSITION_SAVED_SUCCESS_MSG);
         return "redirect:/positions/index";
+    }
+    @GetMapping("/edit/{id}")
+    public String EditEmployment(@PathVariable int id, Model model) {
+        Employment employment = employmentService.getById(id);
+        model.addAttribute("employment", employment);
+        return "positions/positionForm";
+    }
+
+    @ModelAttribute
+    public void setGenerics(Model model) {
+        model.addAttribute("categories", categoryService.findAll());
     }
 
     @InitBinder

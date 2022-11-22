@@ -28,15 +28,14 @@
         <div class="container">
             <h3>Encuentra el trabajo que andas buscando.</h3>
             Puedes buscar por descripción y categoría.
-            <form class="form-inline">
-                <input type="text" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Escriba una búsqueda">&nbsp;
-                <select class="custom-select custom-select mb-3">
-                    <option selected>Seleccione una categoría</option>
-                    <option value="1">Ventas</option>
-                    <option value="2">Contabilidad</option>
-                    <option value="3">Transporte</option>
-                    <option value="4">Informática</option>
-                    <option value="5">Construcción</option>
+            <form class="form-inline" th:action="@{/search}" method="get" th:object="${search}">
+                <input type="text" class="form-control mb-3" th:field="*{description}" placeholder="Escriba una búsqueda">&nbsp;
+                <select class="custom-select custom-select mb-3" th:field="*{category.id}">
+                    <option th:value="${null}" selected>Seleccione una categoría</option>
+                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">
+                        Ventas
+                    </option>
+
                 </select>&nbsp;
                 <button type="submit" class="btn btn-primary mb-3">Buscar</button>
             </form>
@@ -49,11 +48,11 @@
         <hr>
         <div class="row" th:each="employment : ${employments}">
             <div class="col-md-3">
-                <img class="rounded mx-auto d-block" th:src="@{images/{img} (img=${employment.image})}" alt="Generic placeholder image" width="220" height="220">
+                <img class="rounded mx-auto d-block" th:src="@{logos/{img} (img=${employment.image})}" alt="Generic placeholder image" width="220" height="220">
             </div>
             <div class="col-md-9">
                 <h2 th:text="${employment.name}"></h2>
-                <h6 class="card-title"><strong>Categoría: </strong> <span>Arquitectura</span></h6>
+                <h6 class="card-title"><strong>Categoría: </strong> <span th:text="${employment.category.name}"></span></h6>
                 <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${employment.date}"> </span></h6>
                 <p th:text="${employment.description}"></p>
                 <p><a class="btn btn-secondary" th:href="@{details/{id} (id = ${employment.id})}" role="button">Ver Detalle &raquo;</a></p>
