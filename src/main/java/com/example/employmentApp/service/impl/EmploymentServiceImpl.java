@@ -5,6 +5,8 @@ import com.example.employmentApp.repositories.EmploymentsRepository;
 import com.example.employmentApp.service.IEmploymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,5 +52,10 @@ public class EmploymentServiceImpl implements IEmploymentService {
     @Override
     public List<Employment> findByExample(Example<Employment> example) {
         return employmentsRepository.findAll(example);
+    }
+
+    @Override
+    public Page<Employment> findAll(Pageable pageable) {
+        return  employmentsRepository.findAll(pageable);
     }
 }
