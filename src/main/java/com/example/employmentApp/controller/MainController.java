@@ -9,6 +9,7 @@ import com.example.employmentApp.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,7 +67,11 @@ public class MainController {
     @GetMapping("/search")
     public String search(@ModelAttribute("search") Employment employment, Model model) {
         System.out.println("Buscando por: " + employment);
-        Example<Employment> example = Example.of(employment);
+
+        ExampleMatcher matcher = ExampleMatcher
+                .matching().withMatcher("description", ExampleMatcher.GenericPropertyMatchers.contains());
+
+        Example<Employment> example = Example.of(employment, matcher);
         model.addAttribute("employments", employmentService.findByExample(example));
         return "home";
     }
