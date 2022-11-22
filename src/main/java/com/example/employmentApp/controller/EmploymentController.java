@@ -8,6 +8,8 @@ import com.example.employmentApp.utils.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +40,13 @@ public class EmploymentController {
     @GetMapping("/index")
     public String showIndex(Model model) {
         List<Employment> employmentList = employmentService.findAll();
+        model.addAttribute("employments", employmentList);
+        return "positions/positionsList";
+    }
+
+    @GetMapping("/index-paginated")
+    public String showIndexPaginated(Model model, Pageable pageable) {
+        Page<Employment> employmentList = employmentService.findAll(pageable);
         model.addAttribute("employments", employmentList);
         return "positions/positionsList";
     }

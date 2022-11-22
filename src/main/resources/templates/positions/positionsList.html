@@ -46,7 +46,7 @@
                 <tr th:each="employment :${employments}">
                   <td th:text="${employment.category.name}">Ventas</td>
                   <td th:text="${employment.name}">Supervisor de Ventas</td>
-                  <td th:text="${employment.date}">11-01-2019</td>
+                  <td th:text="${#dates.format(employment.date, 'dd-MM-yyyy')}">11-01-2019</td>
                   <td th:text="${employment.status}">Creada</td>
                   <td>
                     <span th:if="${employment.highlighted==1}">Si</span>
@@ -61,6 +61,21 @@
 
               </tbody>
             </table>
+
+            <nav th:if="${employments.totalPages > 0}" aria-label="Page navigation example" >
+              <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${employments.number == 0 ? 'disabled' : ''}">
+                  <a th:href="@{/positions/index-paginated(page=${employments.number - 1})}" class="page-link">Anterior</a>
+                </li>
+
+                <li class="page-item" th:classappend="${i eq employments.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( 1, employments.totalPages, 1)}">
+                  <a class="page-link" th:href="@{/positions/index-paginated?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+                </li>
+                <li class="page-item" th:classappend="${employments.number == (employments.totalPages - 1) ? 'disabled' : ''}">
+                  <a th:href="@{/positions/index-paginated(page=${employments.number + 1})}" class="page-link">Siguiente</a>
+                </li>
+              </ul>
+            </nav>
 
           </div>
         </div>
