@@ -39,12 +39,6 @@ public class MainController {
         return "home";
     }
 
-    @GetMapping("/details/{id}")
-    public String positionDetails(@PathVariable int id, Model model) {
-        Employment employment = employmentService.getById(id);
-        model.addAttribute("employment", employment);
-        return "details";
-    }
     @GetMapping("/signup")
     public String signup(User user) {
         return "signupForm";

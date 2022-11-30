@@ -55,7 +55,7 @@
                 <h6 class="card-title"><strong>Categoría: </strong> <span th:text="${employment.category.name}"></span></h6>
                 <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${#dates.format(employment.date, 'dd-MM-yyyy')}"> </span></h6>
                 <p th:text="${employment.description}"></p>
-                <p><a class="btn btn-secondary" th:href="@{details/{id} (id = ${employment.id})}" role="button">Ver Detalle &raquo;</a></p>
+                <p><a class="btn btn-secondary" th:href="@{positions/view/{id} (id = ${employment.id})}" role="button">Ver Detalle &raquo;</a></p>
             </div>
         </div>
         <hr>

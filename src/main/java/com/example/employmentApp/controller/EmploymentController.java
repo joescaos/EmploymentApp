@@ -89,6 +89,13 @@ public class EmploymentController {
         return "positions/positionForm";
     }
 
+    @GetMapping("/view/{id}")
+    public String positionDetails(@PathVariable int id, Model model) {
+        Employment employment = employmentService.getById(id);
+        model.addAttribute("employment", employment);
+        return "details";
+    }
+
     @ModelAttribute
     public void setGenerics(Model model) {
         model.addAttribute("categories", categoryService.findAll());
