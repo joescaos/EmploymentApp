@@ -19,8 +19,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Objects;
 
 @Controller
 public class MainController {
@@ -72,12 +74,14 @@ public class MainController {
         return "home";
     }
     @GetMapping("/index")
-    public String showIndex(Authentication auth) {
+    public String showIndex(Authentication auth, HttpSession session) {
         String username = auth.getName();
-        System.out.println("nombre de usuario loggeado -> " + username);
-        for (GrantedAuthority rol: auth.getAuthorities()) {
-            System.out.println("Rol: " + rol.getAuthority());
-        }
+       if (Objects.isNull(session.getAttribute("user"))) {
+           User user = userService.findUserByUsername(username);
+           user.setPassword(null);
+           System.out.println("Usuario: " + user);
+           session.setAttribute("user", user);
+       }
         return "redirect:/";
     }
     @ModelAttribute
