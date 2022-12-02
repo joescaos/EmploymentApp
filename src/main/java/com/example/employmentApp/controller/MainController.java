@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Objects;
 
 @Controller
 public class MainController {
@@ -39,12 +43,6 @@ public class MainController {
         return "home";
     }
 
-    @GetMapping("/details/{id}")
-    public String positionDetails(@PathVariable int id, Model model) {
-        Employment employment = employmentService.getById(id);
-        model.addAttribute("employment", employment);
-        return "details";
-    }
     @GetMapping("/signup")
     public String signup(User user) {
         return "signupForm";
@@ -74,6 +72,17 @@ public class MainController {
         Example<Employment> example = Example.of(employment, matcher);
         model.addAttribute("employments", employmentService.findByExample(example));
         return "home";
+    }
+    @GetMapping("/index")
+    public String showIndex(Authentication auth, HttpSession session) {
+        String username = auth.getName();
+       if (Objects.isNull(session.getAttribute("user"))) {
+           User user = userService.findUserByUsername(username);
+           user.setPassword(null);
+           System.out.println("Usuario: " + user);
+           session.setAttribute("user", user);
+       }
+        return "redirect:/";
     }
     @ModelAttribute
     public void setGenerics(Model model) {
