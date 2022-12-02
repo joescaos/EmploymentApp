@@ -12,6 +12,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,9 @@ public class MainController {
     @Autowired
     private ICategoryService categoryService;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping("/")
     public String mainView(Model model) {
         return "home";
@@ -52,9 +56,13 @@ public class MainController {
         if(result.hasErrors()) {
             return "signupForm";
         }
+
+        String rawPass = user.getPassword();
+        String encryptedPass = passwordEncoder.encode(rawPass);
         Profile defaultUserProfile = new Profile();
         defaultUserProfile.setId(3);
         defaultUserProfile.setProfile("USUARIO");
+        user.setPassword(encryptedPass);
         user.setProfiles(Collections.singletonList(defaultUserProfile));
         user.setDateCreated(LocalDate.now());
         user.setStatus(1);
