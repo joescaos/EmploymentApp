@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -68,6 +70,15 @@ public class MainController {
         Example<Employment> example = Example.of(employment, matcher);
         model.addAttribute("employments", employmentService.findByExample(example));
         return "home";
+    }
+    @GetMapping("/index")
+    public String showIndex(Authentication auth) {
+        String username = auth.getName();
+        System.out.println("nombre de usuario loggeado -> " + username);
+        for (GrantedAuthority rol: auth.getAuthorities()) {
+            System.out.println("Rol: " + rol.getAuthority());
+        }
+        return "redirect:/";
     }
     @ModelAttribute
     public void setGenerics(Model model) {
