@@ -42,13 +42,14 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
                         "/",
                         "/signup",
                         "/search",
-                        "/positions/view/**"
+                        "/positions/view/**",
+                        "/bcrypt/**"
                 ).permitAll()
                 .antMatchers("/positions/**").hasAnyAuthority("SUPERVISOR", "ADMINISTRADOR")
                 .antMatchers("/categories/**").hasAnyAuthority("SUPERVISOR", "ADMINISTRADOR")
                 .antMatchers("/users/**").hasAnyAuthority("ADMINISTRADOR")
                 .anyRequest().authenticated()
-                .and().formLogin().permitAll();
+                .and().formLogin().loginPage("/login").permitAll();
 
     }
 

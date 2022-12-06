@@ -13,6 +13,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -91,6 +93,24 @@ public class MainController {
            session.setAttribute("user", user);
        }
         return "redirect:/";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "formLogin";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+        logoutHandler.logout(request, null, null);
+        return "redirect:/login";
+    }
+
+   @GetMapping("/bcrypt/{text}")
+   @ResponseBody
+    public String encrypt(@PathVariable String text) {
+        return String.format("%s Encriptado en bcrypt: %s", text, passwordEncoder.encode(text));
     }
     @ModelAttribute
     public void setGenerics(Model model) {
