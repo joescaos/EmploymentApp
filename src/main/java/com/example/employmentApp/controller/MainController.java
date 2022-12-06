@@ -92,6 +92,11 @@ public class MainController {
        }
         return "redirect:/";
     }
+   @GetMapping("/bcrypt/{text}")
+   @ResponseBody
+    public String encrypt(@PathVariable String text) {
+        return String.format("%s Encriptado en bcrypt: %s", text, passwordEncoder.encode(text));
+    }
     @ModelAttribute
     public void setGenerics(Model model) {
         Employment employmentSearch = new Employment();
