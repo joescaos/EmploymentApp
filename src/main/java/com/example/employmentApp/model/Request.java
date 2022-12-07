@@ -1,8 +1,16 @@
 package com.example.employmentApp.model;
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name="requests")
 public class Request {
@@ -11,7 +19,7 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Date date;
+    private LocalDate date;
 
     private String file;
 
