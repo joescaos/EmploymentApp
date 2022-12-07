@@ -1,56 +1,69 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
 
-  <title>EmpleosApp | Detalles de la Oferta de Trabajo</title>
-  <!-- Bootstrap core CSS -->
-  <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-  <!-- Custom styles for this template -->
-  <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
-  <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    <title>EmpleosApp | Detalles de la Oferta de Trabajo</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
 </head>
 
 <body>
 
 <header>
-  <nav th:insert="fragments/menu :: menu-principal"></nav>
+    <nav th:insert="fragments/menu :: menu-principal"></nav>
 </header>
 
 <main role="main">
-  <hr>
-  <div class="container">
+    <hr>
+    <div class="container">
 
-    <div class="row">
-      <div class="col-md-3">
-        <img class="rounded mx-auto d-block" th:src="@{/logos/{img} (img=${employment.image})}" alt="Generic placeholder image" width="220" height="220">
-      </div>
-      <div class="col-md-9">
-        <div class="card">
-          <h4 class="card-header">Aplicar para <strong th:text="${employment.name}"></strong></h4>
-          <div class="card-body">
-            <h5 class="card-title"><strong>Categoría: </strong> <span th:text="${employment.category.name}"></span></h5>
-            <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${employment.date}"></span></h6>
-            <h6 class="card-title"><strong>Salario Ofrecido: </strong><span th:text="${employment.salary}"></span></h6>
-            <p class="card-text" th:text="${employment.description}"></p>
-
-            <div class="card bg-light mb-3" >
-              <div class="card-body">
-                <h5 class="card-title">Detalles de la oferta de trabajo</h5>
-                <p class="card-text" th:utext="${employment.details}"></p>
-              </div>
+        <div class="row">
+            <div class="col-md-3">
+                <img class="rounded mx-auto d-block" th:src="@{/logos/{img} (img=${employment.image})}"
+                     alt="Generic placeholder image" width="220" height="220">
             </div>
-            <a class="btn btn-primary" href="#" role="button" title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file" aria-hidden="true"></i> Aplicar</a>
-          </div>
-        </div>
-      </div>
-    </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <h4 class="card-header">Aplicar para <strong th:text="${employment.name}"></strong></h4>
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>Categoría: </strong> <span
+                                th:text="${employment.category.name}"></span></h5>
+                        <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${employment.date}"></span>
+                        </h6>
+                        <h6 class="card-title"><strong>Salario Ofrecido: </strong><span
+                                th:text="${employment.salary}"></span></h6>
+                        <p class="card-text" th:text="${employment.description}"></p>
 
-  </div>
+                        <div class="card bg-light mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Detalles de la oferta de trabajo</h5>
+                                <p class="card-text" th:utext="${employment.details}"></p>
+                            </div>
+                        </div>
+                        <div sec:authorize="isAuthenticated()">
+                            <a class="btn btn-primary"
+                               th:href="@{/request/position/{id} (id=${employment.id})}"
+                               role="button"
+                               title="Quiero aplicar para esta oferta de trabajo."><i class="fas fa-file"
+                                                                                      aria-hidden="true"></i>
+                                Aplicar</a>
+                        </div>
+                        <div sec:authorize="isAnonymous()">
+                            <a th:href="@{/signup}">Registrate para aplicar a esta vacante</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 
 <footer th:insert="fragments/footer :: pie-pagina"></footer>
